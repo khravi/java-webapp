@@ -10,6 +10,7 @@ pool:
   vmImage: ubuntu-latest
 steps:
 - task: Maven@4
+  displayName: build war file
   inputs:
     mavenPomFile: 'pom.xml'
     goals: 'clean package'
@@ -19,7 +20,19 @@ steps:
     mavenVersionOption: 'Default'
     mavenAuthenticateFeed: false
     effectivePomSkip: false
-    sonarQubeRunAnalysis: false
+    sonarQubeRunAnalysis: false 
+- task: CopyFiles@2
+  displayName: copy war file to staging dir
+  inputs:
+    SourceFolder: '$(agent.builddirectory)'
+    Contents: '**'
+    TargetFolder: '$(build.artifactstagingdirectory)' 
+- task: PublishBuildArtifacts@1
+  displayName: publish build artifact
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'warfile'
+    publishLocation: 'Container'
 
 
 
