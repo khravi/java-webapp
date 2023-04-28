@@ -32,7 +32,19 @@ steps:
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'warfile'
-    publishLocation: 'Container'
+    publishLocation: 'Container' 
+- task: Docker@2
+  displayName: docker login
+  inputs:
+    containerRegistry: 'docker'
+    command: 'login' 
+- task: Docker@2
+  displayName: docker build and publish 
+  inputs:
+    containerRegistry: 'docker'
+    repository: 'khravi / java-webapp'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
 
 
 
