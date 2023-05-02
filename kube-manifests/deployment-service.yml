@@ -16,8 +16,8 @@ spec:
     spec:
       containers:
         - name: java-webapp1
-          image: 
-          ports: khravi/java-webapp:v3
+          image: khravi/java-webapp:v3
+          ports: 
             - containerPort: 8080
 ---
 apiVersion: v1
