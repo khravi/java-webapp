@@ -59,6 +59,6 @@ steps:
     sshEndpoint: 'ssh-to-aks-control'
     runOptions: 'commands'
     commands: |
-      sudo cd home/azureuser/
+      cd /home/azureuser
       sudo kubectl apply -f kube-manifests/
     readyTimeout: '20000'
