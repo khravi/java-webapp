@@ -44,7 +44,21 @@ steps:
     containerRegistry: 'docker'
     repository: 'khravi / java-webapp'
     command: 'buildAndPush'
-    Dockerfile: '**/Dockerfile'
+    Dockerfile: '**/Dockerfile' 
 
 
-
+- task: CopyFilesOverSSH@0
+  inputs:
+    sshEndpoint: 'ssh-to-aks-control'
+    sourceFolder: '$(System.DefaultWorkingDirectory)/kube-manifests/'
+    contents: '**'
+    targetFolder: '/root/kube-manifests/'
+    readyTimeout: '20000' 
+- task: SSH@0
+  inputs:
+    sshEndpoint: 'ssh-to-aks-control'
+    runOptions: 'commands'
+    commands: |
+      sudo cd /root/
+      sudo kubectl apply -f kube-manifests/
+    readyTimeout: '20000'
