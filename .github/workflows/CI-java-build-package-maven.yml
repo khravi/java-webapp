@@ -60,5 +60,6 @@ jobs:
     - name: docker build image and push docker registry
       uses: docker/build-push-action@v4
       with:
+        context: .
         push: true
         tags: khravi/java-sample-app:latest
