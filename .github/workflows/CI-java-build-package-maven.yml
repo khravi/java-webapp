@@ -65,7 +65,7 @@ jobs:
         tags: khravi/java-sample-app:${{ github.run_number }}
    
   deploy-dev:
-    runs-on: unbuntu-latest
+    runs-on: ubuntu-latest
     needs: [ build ]
     steps:
     - name: Set up QEMU
