@@ -66,6 +66,7 @@ jobs:
    
   deploy-dev:
     runs-on: ubuntu-latest
+    environment: dev
     needs: [ build ]
     steps:
     - name: Set up QEMU
