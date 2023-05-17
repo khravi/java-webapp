@@ -44,7 +44,13 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: mywebapp-artifact
-        path: target/*.war 
+        path: target/*.war
+        
+    - name: upload kubemanifest
+      uses: actions/upload-artifact@v3
+      with:
+        name: kubemanifest
+        path: ./kube-manifests/*
         
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v2
